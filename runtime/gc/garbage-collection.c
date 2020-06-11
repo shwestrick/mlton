@@ -25,7 +25,8 @@ void majorGC (GC_state s, size_t bytesRequested, bool mayResize) {
     s->hashConsDuringGC = TRUE;
   desiredSize = 
     sizeofHeapDesired (s, s->lastMajorStatistics.bytesLive + bytesRequested, 0);
-  if (not FORCE_MARK_COMPACT
+  if (FALSE
+      and not FORCE_MARK_COMPACT
       and not s->hashConsDuringGC // only markCompact can hash cons
       and s->heap.withMapsSize < s->sysvals.ram
       and (not isHeapInit (&s->secondaryHeap)
